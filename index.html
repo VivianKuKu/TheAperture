@@ -20,22 +20,20 @@
     <div class="noise-overlay"></div>
 
     <header class="header">
-        <div class="container">
-            <a href="#" class="logo">The Aperture<span class="dot">.</span></a>
-            <!-- <nav class="nav">
-                <a href="#mission">Mission</a>
-                <a href="#community">Community</a>
-                <a href="#events">Events</a>
-            </nav> -->
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-the">The</span>
+                <span class="logo-aperture">Aperture<span class="dot">.</span></span>
+            </a>
         </div>
     </header>
 
     <main>
         <section class="hero">
-            <div class="container hero-content">
+            <div class="container hero-content-centered">
                 <div class="hero-text-wrapper">
-                    <h1 class="hero-title reveal">Open the aperture <br><span class="highlight">on what’s
-                            possible.</span>
+                    <h1 class="hero-title reveal delay-1">Open what's possible <br>with <span
+                            class="highlight-wrapper"><span class="highlight-ai" id="rotating-text">AI</span></span>.
                     </h1>
                     <p class="hero-description reveal delay-1">
                         Not a classroom. Not a conference. Just a place to figure this out together.
@@ -45,28 +43,67 @@
                         <a href="#conversations" class="btn btn-secondary">Explore Topics</a>
                     </div>
                 </div>
-                <div class="hero-image-container fade-in">
-                    <img src="assets/hero-illustration.png" alt="Community gathering in a coffee shop"
-                        class="hero-illustration">
-                </div>
+                <!-- Decorative glow behind -->
+                <div class="hero-glow"></div>
             </div>
         </section>
 
-        <!-- Mission / About Section -->
-        <section id="mission" class="section-padding">
+        <!-- Mission Section -->
+        <section class="section-padding">
             <div class="container">
-                <div class="mission-card fade-in">
-                    <div class="mission-content">
-                        <h2 class="highlight-text">From Learner to Leader.</h2>
-                        <p class="mission-text flow-text">
-                            A community created by learners, for learners. We don't just study AI—we find the confidence
-                            to lead the conversation in our own industries.
+                <div class="mission-container">
+                    <div class="mission-header text-center mb-5">
+                        <span class="mission-kicker">Our Mission</span>
+                        <h2 class="mission-title">From Learner to Leader.</h2>
+                        <p class="lead" style="max-width: 700px; margin: 0 auto;">
+                            We believe the best way to understand the future is to build it yourself.
                         </p>
-                        <p class="mission-sub">
-                            We are living through a massive shift, but navigating the AI era shouldn’t feel like walking
-                            through a fog. By teaching each other, we find the focus we need to go back to our own
-                            companies and lead the conversation.
-                        </p>
+                    </div>
+
+                    <div class="values-grid">
+                        <!-- Value 1 -->
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3>Build with AI</h3>
+                            <p>Don't just watch the revolution. Get your hands dirty with code, agents, and real
+                                projects.</p>
+                        </div>
+
+                        <!-- Value 2 -->
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h3>Community Led</h3>
+                            <p>No gurus here. Just a peer-to-peer network of builders helping each other level up.</p>
+                        </div>
+
+                        <!-- Value 3 -->
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <h3>Future Proof</h3>
+                            <p>Go beyond the hype cycle. focus on the fundamental mechanics that will define the next
+                                decade.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,6 +275,78 @@
         </div>
     </footer>
 
+    <style>
+        /* Text Rotation Animation Styles */
+        .highlight-wrapper {
+            display: inline-block;
+            position: relative;
+            min-width: 1.5em;
+            /* Prevent layout shift */
+        }
+
+        .highlight-ai {
+            display: inline-block;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .highlight-ai.fade-out {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .highlight-ai.fade-in {
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rotater = document.getElementById('rotating-text');
+            const terms = ['AI', 'Community', 'Data', 'Purpose'];
+            let index = 0;
+
+            const rotateText = () => {
+                // Fade out
+                rotater.classList.add('fade-out');
+
+                setTimeout(() => {
+                    // Change text
+                    index = (index + 1) % terms.length;
+                    rotater.textContent = terms[index];
+
+                    // Remove fade out and trigger fade in
+                    rotater.classList.remove('fade-out');
+                    rotater.classList.add('fade-in');
+
+                    // Clean up class after animation
+                    setTimeout(() => {
+                        rotater.classList.remove('fade-in');
+                    }, 500);
+
+                }, 500); // Wait for fade out to finish
+            };
+
+            // Trigger first rotation quickly (1s), then cycle every 3s
+            setTimeout(() => {
+                rotateText();
+                setInterval(rotateText, 3000);
+            }, 1000);
+        });
+    </script>
 </body>
 
 </html>
