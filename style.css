@@ -458,6 +458,149 @@ p {
     border-radius: 4px;
 }
 
+/* Archive List (Premium Slim Cards) */
+.archive-container {
+    max-width: 900px;
+    margin: var(--spacing-md) auto 0;
+    text-align: center;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--card-border);
+}
+
+.btn-text:hover {
+    color: var(--brand-pop);
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+}
+
+.archive-list {
+    text-align: left;
+    margin-top: var(--spacing-md);
+    border-top: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 5px;
+}
+
+.archive-list.show {
+    max-height: 3000px;
+    opacity: 1;
+    margin-top: var(--spacing-lg);
+}
+
+.archive-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 140px;
+    /* Date | Title | Speaker */
+    gap: 1.5rem;
+    padding: 1.25rem 2rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    /* Glassy background */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: slideUpFade 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Stagger animation handled by delay or js */
+.archive-item:nth-child(n) {
+    animation-delay: 0.05s;
+}
+
+.archive-item:hover {
+    transform: translateY(-4px) scale(1.005);
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    border-color: #fff;
+    z-index: 1;
+}
+
+.archive-date {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.archive-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+}
+
+.archive-speaker {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: right;
+    font-weight: 500;
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .archive-item {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "date"
+            "title"
+            "speaker";
+        gap: 0.5rem;
+        padding: 1.5rem;
+        text-align: left;
+    }
+
+    .archive-date {
+        grid-area: date;
+        text-align: left;
+        /* Aligned left on mobile for this layout */
+    }
+
+    .archive-title {
+        grid-area: title;
+        font-size: 1.2rem;
+        margin-top: 0.25rem;
+    }
+
+    .archive-speaker {
+        grid-area: speaker;
+        text-align: left;
+        margin-top: 0.25rem;
+    }
+}
+
 .meetup-card {
     min-width: 320px;
     background: var(--card-bg);

@@ -33,4 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         aperture.style.transform = `translateY(-50%) translate(${x}px, ${y}px)`;
     });
+
+    // Archive Toggle
+    const toggleBtn = document.getElementById('toggle-archive');
+    const archiveList = document.getElementById('archive-list');
+
+    if (toggleBtn && archiveList) {
+        toggleBtn.addEventListener('click', () => {
+            archiveList.classList.toggle('show');
+            const isShown = archiveList.classList.contains('show');
+            const arrow = toggleBtn.querySelector('span');
+
+            toggleBtn.innerHTML = isShown
+                ? 'Hide 2025 Events <span>↑</span>'
+                : 'View 2025 Events <span>↓</span>';
+        });
+    }
 });
