@@ -2,11 +2,11 @@
 :root {
     /* Backgrounds */
     /* Backgrounds */
-    --bg-color: #FFFFFF;
-    /* Clean Tech White */
-    --bg-gradient: radial-gradient(circle at top right, #fff1f2, transparent 40%),
-        radial-gradient(circle at bottom left, #f3f4f6, transparent 40%),
-        linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 100%);
+    --bg-color: #FFFCF9;
+    /* Warm Paper White */
+    --bg-gradient: radial-gradient(circle at top right, #FFE8D6, transparent 40%),
+        radial-gradient(circle at bottom left, #FEF3C7, transparent 40%),
+        linear-gradient(135deg, #FFFCF9 0%, #FFFCF9 100%);
 
     /* Cards */
     --card-bg: #FFFFFF;
