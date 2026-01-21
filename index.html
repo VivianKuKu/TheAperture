@@ -19,12 +19,19 @@
 <body>
     <div class="noise-overlay"></div>
 
-    <header class="header">
+    <header class="header floating-header">
         <div class="container header-container">
             <a href="#" class="logo">
                 <span class="logo-the">The</span>
                 <span class="logo-aperture">Aperture<span class="dot">.</span></span>
             </a>
+            <nav class="main-nav">
+                <a href="#mission">Mission</a>
+                <a href="#meetups">Meetups</a>
+                <a href="#expectations">FAQ</a>
+                <a href="#voices">Voices</a>
+                <a href="#core-members">Team</a>
+            </nav>
         </div>
     </header>
 
@@ -49,7 +56,7 @@
         </section>
 
         <!-- Mission Section -->
-        <section class="section-padding">
+        <section id="mission" class="section-padding">
             <div class="container">
                 <div class="mission-feature">
                     <div class="mission-content">
@@ -58,9 +65,6 @@
                         <div class="mission-body">
                             <p class="lead">A community created by learners, for learners. We don't just study AI—we
                                 find the confidence to lead the conversation in our own industries.</p>
-                            <p>We are living through a massive shift, but navigating the AI era shouldn’t feel like
-                                walking through a fog. By teaching each other, we find the focus we need to go back to
-                                our own companies and lead the conversation.</p>
                         </div>
                     </div>
                     <div class="mission-visual">
@@ -246,6 +250,46 @@
                 </div>
         </section>
 
+        <!-- What to Expect Section -->
+        <section id="expectations" class="section-padding bg-soft">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>What to Expect 🎯</h2>
+                    <p class="section-sub">Everything you need to know about joining our circle.</p>
+                </div>
+                <div class="faq-grid reveal delay-1">
+                    <!-- Card 1 -->
+                    <div class="faq-card glass">
+                        <h3>Is it boring or tedious?</h3>
+                        <p>Absolutely not! Our Meetups feature engaging, interactive discussions. Every event is
+                            hosted by a core member with a diverse background to keep things fresh.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="faq-card glass">
+                        <h3>Networking fluff or real connections?</h3>
+                        <p>We're about peer-to-peer mentorship and mutual support. Being genuine and supportive
+                            enables us to build meaningful relationships that last. 💙</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="faq-card glass">
+                        <h3>Will I be in endless meetings?</h3>
+                        <p>No way! We typically meet twice a month for 2 hours. The format is flexible, open for
+                            discussion, and strictly "fluff-free."</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="faq-card glass">
+                        <h3>How will this help my career?</h3>
+                        <p>You'll gain hands-on leadership experience by hosting, moderating, or being a comms
+                            ambassador. It’s a safe space to grow your AI & Data confidence. 🙋‍♀️</p>
+                    </div>
+                </div>
+                <div class="faq-footer reveal delay-2">
+                    <p>This is a supportive environment for you to gain hands-on experience that boosts your
+                        confidence in talking about AI and Data in your own industry. 👀</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Recent Conversations -->
         <section id="conversations" class="section-padding bg-soft">
             <div class="container">
@@ -277,6 +321,42 @@
                             <p class="bubble-text">"I'm still stuck trying to get reliable JSON output for my travel
                                 agent app. Any tips?"</p>
                             <span class="timestamp">Just now in #help-needed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Voices Section -->
+        <section id="voices" class="section-padding">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Voices from the Community 💬</h2>
+                    <p class="section-sub">What our members are saying about their journey.</p>
+                </div>
+                <div class="voices-grid reveal delay-1">
+                    <div class="voice-card glass">
+                        <p class="quote">"An encouraging and supportive community where learning, sharing, and
+                            friendship naturally happen."</p>
+                        <div class="voice-author">
+                            <strong>Vivian Ku</strong>
+                            <span>AI Strategist & Product Manager</span>
+                        </div>
+                    </div>
+                    <div class="voice-card glass">
+                        <p class="quote">"A unique platform to hear diverse AI & Data use cases from experts across 15+
+                            different industries."</p>
+                        <div class="voice-author">
+                            <strong>Cynthia Lo</strong>
+                            <span>Senior Business Analyst</span>
+                        </div>
+                    </div>
+                    <div class="voice-card glass">
+                        <p class="quote">"The perfect place to build confidence, improve public speaking, and grow your
+                            career alongside like-minded people."</p>
+                        <div class="voice-author">
+                            <strong>XYZ</strong>
+                            <span>Community Member</span>
                         </div>
                     </div>
                 </div>
@@ -407,6 +487,12 @@
             }, 1000);
         });
     </script>
+    <button id="back-to-top" class="back-to-top glass" aria-label="Go to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
 </body>
 
 </html>

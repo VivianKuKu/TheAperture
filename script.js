@@ -49,4 +49,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 : 'View 2025 Events <span>↓</span>';
         });
     }
+
+    // Back to Top & Floating Nav Logic
+    const backToTopBtn = document.getElementById('back-to-top');
+    const floatingNav = document.querySelector('.floating-header');
+
+    window.addEventListener('scroll', () => {
+        // Back to top visibility
+        if (backToTopBtn) {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Nav style on scroll
+        if (floatingNav) {
+            if (window.scrollY > 50) {
+                floatingNav.style.background = 'rgba(255, 255, 255, 0.85)';
+                floatingNav.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+                floatingNav.style.padding = '0.5rem 2rem';
+            } else {
+                floatingNav.style.background = 'rgba(255, 255, 255, 0.6)';
+                floatingNav.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
+                floatingNav.style.padding = '0.75rem 2rem';
+            }
+        }
+    });
+
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.main-nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const navHeight = floatingNav ? floatingNav.offsetHeight + 40 : 100;
+                const elementPosition = targetElement.offsetTop;
+                const offsetPosition = elementPosition - navHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });
