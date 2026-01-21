@@ -330,7 +330,8 @@ p {
 .hero-description {
     font-size: 1.5rem;
     color: var(--text-secondary);
-    max-width: 600px;
+    max-width: 900px;
+    /* Increased from 600px to fit long slogan on one line */
     margin: 0 0 var(--spacing-lg) 0;
     /* Align margin left */
     line-height: 1.5;
@@ -1086,6 +1087,7 @@ p {
         grid-template-columns: 1fr;
     }
 }
+
 /* Floating Header Navigation */
 .floating-header {
     position: fixed;
@@ -1153,7 +1155,8 @@ p {
 
 @media (max-width: 768px) {
     .main-nav {
-        display: none; /* Hide nav links on mobile for premium look, or add hamburger later */
+        display: none;
+        /* Hide nav links on mobile for premium look, or add hamburger later */
     }
 }
 
@@ -1247,7 +1250,8 @@ p {
 
 /* 1. Prevent overlapping with Hero Title */
 .hero {
-    padding-top: 140px; /* Increased from 40px/80px to clear floating nav */
+    padding-top: 140px;
+    /* Increased from 40px/80px to clear floating nav */
 }
 
 /* 2. Responsive Floating Nav */
@@ -1261,18 +1265,21 @@ p {
 /* 3. Mobile Navigation (Simple & Clean) */
 @media (max-width: 768px) {
     .hero {
-        padding-top: 120px; /* Slightly less on mobile, but enough to clear */
-        align-items: flex-start; /* Align closer to top */
+        padding-top: 120px;
+        /* Slightly less on mobile, but enough to clear */
+        align-items: flex-start;
+        /* Align closer to top */
     }
 
     .hero-title {
-        font-size: 3rem; /* Reduced from clamp for better fit */
+        font-size: 3rem;
+        /* Reduced from clamp for better fit */
         margin-top: 1rem;
     }
 
     /* Hide text links on mobile to save space */
     .main-nav {
-        display: none; 
+        display: none;
     }
 
     /* Optimize header for mobile */
@@ -1287,7 +1294,8 @@ p {
     }
 
     .logo-aperture {
-        font-size: 1.4rem; /* Smaller logo */
+        font-size: 1.4rem;
+        /* Smaller logo */
     }
 
     .logo-the {
@@ -1304,6 +1312,7 @@ p {
 /* --- Mobile Navigation Update (Horizontal Scroll) --- */
 
 @media (max-width: 768px) {
+
     /* Show nav links again */
     .main-nav {
         display: flex;
@@ -1312,12 +1321,15 @@ p {
         gap: 1.5rem;
         width: 100%;
         padding: 0.25rem 0.5rem;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        scrollbar-width: none; /* Hide scrollbar Firefox */
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scrolling on iOS */
+        scrollbar-width: none;
+        /* Hide scrollbar Firefox */
     }
 
     .main-nav::-webkit-scrollbar {
-        display: none; /* Hide scrollbar Chrome/Safari */
+        display: none;
+        /* Hide scrollbar Chrome/Safari */
     }
 
     .main-nav a {
@@ -1327,10 +1339,13 @@ p {
     }
 
     .floating-header {
-        border-radius: 20px; /* Slightly less round on mobile to fit more */
+        border-radius: 20px;
+        /* Slightly less round on mobile to fit more */
         padding: 0.75rem 1.25rem;
-        width: 95%; /* Max width */
-        flex-direction: column; /* Stack logo and nav */
+        width: 95%;
+        /* Max width */
+        flex-direction: column;
+        /* Stack logo and nav */
         align-items: center;
         gap: 0.5rem;
     }
@@ -1344,5 +1359,39 @@ p {
 
     .logo {
         margin-bottom: 0;
+    }
+}
+
+/* Fix Mobile Button Overflow */
+@media (max-width: 480px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        text-align: center;
+        margin-top: 0;
+        /* Removing top margin to let gap handle spacing */
+        margin-left: 0;
+        /* Reset margin for secondary button */
+    }
+
+    .btn-secondary {
+        margin-left: 0;
+    }
+}
+
+/* Ensure single line text on mobile buttons */
+@media (max-width: 480px) {
+    .hero-actions .btn {
+        white-space: nowrap;
+        /* Prevent wrapping */
+        padding: 1rem 1rem;
+        /* Reduce horizontal padding */
+        font-size: 1rem;
+        /* Slightly smaller text if needed */
     }
 }
