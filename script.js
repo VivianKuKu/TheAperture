@@ -32,18 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
     revealOnScroll();
 
     // Swipe Hint Trigger (Mobile)
-    // Only triggers when the proper section comes into view
+    // Triggers when section comes into view, resets when out of view
     const swipeHints = document.querySelectorAll('.swipe-hint');
     if (swipeHints.length > 0) {
         const hintObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const hint = entry.target;
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-swipe');
-                    // Stop observing once triggered so it doesn't loop annoyance
-                    hintObserver.unobserve(entry.target);
+                    // Slight delay to ensure it doesn't trigger if just scrolling past quickly
+                    hint.classList.add('animate-swipe');
+                } else {
+                    // Reset animation when scrolling away so it can play again if revisited
+                    hint.classList.remove('animate-swipe');
                 }
             });
-        }, { threshold: 0.5 }); // Trigger when 50% visible
+        }, { threshold: 0.2 }); // Lower threshold to ensure it catches
 
         swipeHints.forEach(hint => hintObserver.observe(hint));
     }
