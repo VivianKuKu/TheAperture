@@ -1400,6 +1400,7 @@ p {
 @media (max-width: 768px) {
 
     .faq-grid,
+    .meetup-scroll-container,
     .voices-grid {
         display: flex;
         /* Switch from grid to flex for scrolling */
@@ -1424,12 +1425,14 @@ p {
     }
 
     .faq-grid::-webkit-scrollbar,
+    .meetup-scroll-container::-webkit-scrollbar,
     .voices-grid::-webkit-scrollbar {
         display: none;
         /* Hide scrollbar Chrome/Safari */
     }
 
     .faq-card,
+    .meetup-card,
     .voice-card {
         width: 85vw;
         /* Force specific width */
@@ -1448,5 +1451,80 @@ p {
         margin-bottom: 0;
         white-space: normal;
         /* Ensure text wraps */
+    }
+}
+
+/* Swipe Hint Animation */
+.scroll-hint-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.swipe-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.swipe-hint.animate-swipe {
+    animation: swipeHintAnim 3s ease-in-out 0.5s forwards;
+}
+
+.swipe-hint .hand-icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+    transform: rotate(15deg);
+}
+
+.swipe-hint .swipe-text {
+    font-size: 0.9rem;
+    color: var(--brand-pop);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-top: 0px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+}
+
+@keyframes swipeHintAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateX(40px);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateX(40px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateX(-40px);
+    }
+
+    85% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateX(-40px);
+    }
+
+    100% {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .swipe-hint {
+        display: none !important;
     }
 }

@@ -1,8 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Force scroll to top on refresh
+    // 1. Force scroll to top on refresh and remove hash to prevent jumping
     if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';
     }
+
+    // Clear hash if present to prevent browser auto-scroll
+    if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname);
+    }
+
+    // Force top position
     window.scrollTo(0, 0);
 
     const reveals = document.querySelectorAll('.reveal');
@@ -23,6 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
+
+    // Swipe Hint Trigger (Mobile)
+    // Only triggers when the proper section comes into view
+    const swipeHints = document.querySelectorAll('.swipe-hint');
+    if (swipeHints.length > 0) {
+        const hintObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-swipe');
+                    // Stop observing once triggered so it doesn't loop annoyance
+                    hintObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% visible
+
+        swipeHints.forEach(hint => hintObserver.observe(hint));
+    }
 
     // Mouse Parallax for Aperture
     const aperture = document.querySelector('.aperture-graphic');
