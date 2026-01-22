@@ -1395,3 +1395,58 @@ p {
         /* Slightly smaller text if needed */
     }
 }
+
+/* --- Mobile Horizontal Scroll Fix (Carousels) --- */
+@media (max-width: 768px) {
+
+    .faq-grid,
+    .voices-grid {
+        display: flex;
+        /* Switch from grid to flex for scrolling */
+        grid-template-columns: none;
+        overflow-x: auto;
+        gap: 1.5rem;
+        padding-bottom: 3rem;
+        /* Extra space for shadows */
+
+        /* Full width breakout to edges */
+        margin-left: -2rem;
+        margin-right: -2rem;
+        padding-left: 2rem;
+        /* Align first card with container */
+        padding-right: 2rem;
+        /* Padding for end of list */
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Hide scrollbar Firefox */
+    }
+
+    .faq-grid::-webkit-scrollbar,
+    .voices-grid::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar Chrome/Safari */
+    }
+
+    .faq-card,
+    .voice-card {
+        width: 85vw;
+        /* Force specific width */
+        max-width: 85vw;
+        /* Prevent growing */
+        min-width: 0;
+        /* Reset min-width */
+        padding: 1.5rem;
+        /* Reduce padding for mobile */
+
+        scroll-snap-align: center;
+        flex-shrink: 0;
+        height: auto;
+        flex-direction: column;
+        /* Ensure vertical layout inside card */
+        margin-bottom: 0;
+        white-space: normal;
+        /* Ensure text wraps */
+    }
+}
