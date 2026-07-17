@@ -12,6 +12,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // Force top position
     window.scrollTo(0, 0);
 
+    // Hero rotating word
+    const rotater = document.getElementById('rotating-text');
+    if (rotater) {
+        const terms = ['AI', 'Community', 'Data', 'Purpose'];
+        let termIndex = 0;
+
+        const rotateText = () => {
+            rotater.classList.add('fade-out');
+
+            setTimeout(() => {
+                termIndex = (termIndex + 1) % terms.length;
+                rotater.textContent = terms[termIndex];
+                rotater.classList.remove('fade-out');
+                rotater.classList.add('fade-in');
+
+                setTimeout(() => {
+                    rotater.classList.remove('fade-in');
+                }, 500);
+            }, 500);
+        };
+
+        setTimeout(() => {
+            rotateText();
+            setInterval(rotateText, 3000);
+        }, 1000);
+    }
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item) => {
+        const btn = item.querySelector('.faq-question');
+        if (!btn) return;
+
+        btn.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+
+            // Close all items (single-open accordion)
+            faqItems.forEach((i) => {
+                i.classList.remove('active');
+                const b = i.querySelector('.faq-question');
+                if (b) b.setAttribute('aria-expanded', 'false');
+            });
+
+            // Toggle clicked item open unless it was already open
+            if (!isActive) {
+                item.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // Keyboard: Enter / Space already handled by button element natively
+    });
+
     const reveals = document.querySelectorAll('.reveal');
 
     // Scroll Reveal
@@ -72,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const arrow = toggleBtn.querySelector('span');
 
             toggleBtn.innerHTML = isShown
-                ? 'Hide 2025 Events <span>↑</span>'
-                : 'View 2025 Events <span>↓</span>';
+                ? 'Hide Past Events <span>↑</span>'
+                : 'View Past Events <span>↓</span>';
         });
     }
 
@@ -132,4 +185,128 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Lightbox Logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDesc = document.getElementById('lightbox-desc');
+    const closeBtn = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+    const prevBtn = lightbox ? lightbox.querySelector('.lightbox-prev') : null;
+    const nextBtn = lightbox ? lightbox.querySelector('.lightbox-next') : null;
+    const momentCards = Array.from(document.querySelectorAll('.moment-card'));
+    let activeIndex = -1;
+
+    if (lightbox && momentCards.length > 0) {
+        const updateLightbox = (index) => {
+            if (index < 0 || index >= momentCards.length) return;
+            activeIndex = index;
+            const card = momentCards[activeIndex];
+            const src = card.getAttribute('data-src');
+            const caption = card.getAttribute('data-caption');
+            const desc = card.getAttribute('data-desc');
+
+            lightboxImg.src = src;
+            lightboxImg.alt = caption;
+            lightboxTitle.textContent = caption;
+            lightboxDesc.textContent = desc;
+        };
+
+        const openLightbox = (index) => {
+            updateLightbox(index);
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // Prevent page scroll
+        };
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restore page scroll
+            setTimeout(() => {
+                lightboxImg.src = ''; // Clear image to save resources
+            }, 300);
+        };
+
+        const showNext = () => {
+            let nextIndex = (activeIndex + 1) % momentCards.length;
+            updateLightbox(nextIndex);
+        };
+
+        const showPrev = () => {
+            let prevIndex = (activeIndex - 1 + momentCards.length) % momentCards.length;
+            updateLightbox(prevIndex);
+        };
+
+        // Attach click events to moment cards
+        momentCards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+
+        // Close events
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeLightbox);
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            // Close lightbox if clicking outside the content area or on buttons
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Navigation events
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNext();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPrev();
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowRight') {
+                showNext();
+            } else if (e.key === 'ArrowLeft') {
+                showPrev();
+            }
+        });
+
+        // Touch Swipe support for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        const handleSwipe = () => {
+            const swipeThreshold = 50; // minimum distance in px
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swiped Left -> Show Next
+                showNext();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                // Swiped Right -> Show Prev
+                showPrev();
+            }
+        };
+    }
 });
